@@ -76,6 +76,7 @@ server <- function(input, output,session) {
     file$Emprendedora=stri_trans_totitle(file$Emprendedora)
     file$Municipio=stri_trans_totitle(file$Municipio)
     table_to_plot = file %>%
+      dplyr::filter(Status %in% c("Activo", "Retraso", "Invertible")) %>% 
       dplyr::group_by_at(variable_x) %>%
       dplyr::summarise(Frequency=length(Inversion),
                        Quantity=sum(Inversion))
